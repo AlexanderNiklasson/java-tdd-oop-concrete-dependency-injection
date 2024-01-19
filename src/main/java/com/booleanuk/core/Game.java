@@ -1,12 +1,15 @@
 package com.booleanuk.core;
 
 public class Game {
-    public String name;
+    private String name;
 
     public Game(String name) {
         this.name = name;
     }
 
+    public String getName(){
+        return this.name;
+    }
     public String start() {
         return "Playing " + this.name;
     }

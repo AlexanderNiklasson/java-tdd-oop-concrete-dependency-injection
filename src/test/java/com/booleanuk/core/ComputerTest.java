@@ -12,7 +12,17 @@ class ComputerTest {
         Computer myPc = new Computer(myPsu);
         myPc.turnOn();
 
-        Assertions.assertTrue(myPsu.isOn);
+        Assertions.assertTrue(myPsu.isOn());
+    }
+    @Test
+    public void shouldTurnOff(){
+        PowerSupply myPsu = new PowerSupply();
+        Computer myPc = new Computer(myPsu);
+        myPc.turnOn();
+
+        Assertions.assertTrue(myPsu.isOn());
+        myPc.turnOff();
+        Assertions.assertFalse(myPsu.isOn());
     }
 
     @Test
@@ -20,10 +30,10 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
 
-        myPc.installGame("Final Fantasy XI");
+        myPc.installGame(new Game("Final Fantasy XI"));
 
-        Assertions.assertEquals(1, myPc.installedGames.size());
-        Assertions.assertEquals("Final Fantasy XI", myPc.installedGames.get(0).name);
+        Assertions.assertEquals(1, myPc.getInstalledGames().size());
+        Assertions.assertEquals("Final Fantasy XI", myPc.getInstalledGames().get(0).getName());
     }
 
     @Test
@@ -31,8 +41,8 @@ class ComputerTest {
         PowerSupply myPsu = new PowerSupply();
         Computer myPc = new Computer(myPsu);
 
-        myPc.installGame("Duck Game");
-        myPc.installGame("Dragon's Dogma: Dark Arisen");
+        myPc.installGame(new Game("Duck Game"));
+        myPc.installGame(new Game("Dragon's Dogma: Dark Arisen"));
 
         Assertions.assertEquals("Playing Duck Game", myPc.playGame("Duck Game"));
         Assertions.assertEquals("Playing Dragon's Dogma: Dark Arisen", myPc.playGame("Dragon's Dogma: Dark Arisen"));
@@ -49,8 +59,8 @@ class ComputerTest {
 
         Computer myPc = new Computer(myPsu, preInstalled);
 
-        Assertions.assertEquals(2, myPc.installedGames.size());
-        Assertions.assertEquals("Dwarf Fortress", myPc.installedGames.get(0).name);
-        Assertions.assertEquals("Baldur's Gate", myPc.installedGames.get(1).name);
+        Assertions.assertEquals(2, myPc.getInstalledGames().size());
+        Assertions.assertEquals("Dwarf Fortress", myPc.getInstalledGames().get(0).getName());
+        Assertions.assertEquals("Baldur's Gate", myPc.getInstalledGames().get(1).getName());
     }
 }
